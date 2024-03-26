@@ -7,13 +7,44 @@ body{
   color: black;
   font-family: Arial, serif;
 }
+#game{
+  width: 700px;
+  height: 500px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  //background: #FF0000;
+  //border: solid 1px black ;
+}
+.content{
+  width: 700px;
+  height: 39px;
+  display: inline-block;
+  border: solid 2px cadetblue;
+  .fa-bars{
+    display: block;
+    margin: 20px 0 0 20px;
+  }
+  .level{
+    float: left;
+    display: block;
+    margin-left: 50px;
+    margin-top: -13px;
+  }
+  .score{
+    float: right;
+    display: block;
+    margin-top: -13px;
+    margin-right: 60px;
+  }
+}
   #canvas{
-    width: 600px;
-    height: 500px;
-    margin: 55px 0 0 320px;
+    width: 700px;
+    height: 460px;
+    display: block;
+    margin-top: 1px;
     border: solid 1px black;
-    background-image: url("https://trangtrinhacua.com.vn/wp-content/uploads/2023/12/15.png");
-    background-color: #FFFF00;
+    background-color: #79CDCD;
   }
 
 
