@@ -4,13 +4,35 @@ var x = 10, y = 10, dx = 1, dy= 1, radius = 4;
 var bar={
     width: 40, height: 4, x: 0, y: canvas.height - 4, speed: 2, movingLeft: false, movingRight: false
 };
-
+var brick={
+    offsetX: 8,
+    offsetY: 8,
+    margin: 8,
+    width: 50,
+    height: 5,
+    totalRow: 4,
+    totalCol: 5
+}
+var brickList = []
+for(var i = 0; i < brick.totalRow; i++){
+    for(var j = 0; j < brick.totalCol; j++){
+        brickList.push({
+            x: brick.offsetX + j *(brick.width + brick.margin),
+            y: brick.offsetY + i *(brick.height + brick.margin),
+            isBroken: false
+        })
+    }
+}
 function draw(){
     context.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
     moveBall();
     drawBar();
     moveBar();
+    collideBar();
+    drawBricks()
+    collideBrick();
+
 
     requestAnimationFrame(draw);
 }
@@ -78,4 +100,38 @@ function moveBar(){
     if(bar.x < 0) bar.x = 0;
     else if (bar.x > canvas.width - bar.width) bar.x = canvas.width - bar.width;
 }
+//bar chạm vào thanh đỡ
+function collideBar(){
+    if(x + radius >= bar.x && x + radius <= bar.x + bar.width
+        && y + radius >= canvas.height - bar.height ){
+        dy = -dy;
+    }
+}
+//vẽ cách viên gạch với row = 4; col = 5
+function drawBricks(){
+    brickList.forEach(function (b){
+        if(!b.isBroken){
+            context.beginPath()
+            context.rect(b.x, b.y, brick.width, brick.height)
+            context.fill()
+            context.closePath()
+        }
+    })
+}
+//xử lý va chạm của bóng và các viên gạch
+function collideBrick(){
+    brickList.forEach(function (b){
+        if(!b.isBroken){
+            if(x >= b.x && x <= b.x + brick.width
+                && y + radius >= b.y
+                && y - radius <= b.y + brick.height){
+                dy = -dy;
+                b.isBroken = true;
+            }
+        }
+    })
+}
+
+
+
 
